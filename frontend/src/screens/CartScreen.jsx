@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, ListGroup, Image, Form, Button, Card, ListGroupItem} from 'react-bootstrap'
+import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import { FaTrash } from 'react-icons/fa'
 import { addToCart, removeFromCart } from '../slices/cartSlice'
 import Message from '../components/Message'
@@ -18,7 +18,7 @@ const CartScreen = () => {
         dispatch(removeFromCart(id))
     }
     const checkoutHandler = () => {
-        navigate('/login?/redirect=/shipping')
+        navigate('/login?redirect=/shipping')
     }
   return (
     <Row>
@@ -66,7 +66,7 @@ const CartScreen = () => {
                         ${ cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
                     </ListGroup.Item>
                     <ListGroup.Item>
-                        <Button type='button' className='btn-block' disabled={ cartItems.length === 0} onClick={() => checkoutHandler()}>Proceed to Checkout</Button>
+                        <Button type='button' className='btn-block' disabled={ cartItems.length === 0} onClick={checkoutHandler}>Proceed to Checkout</Button>
                     </ListGroup.Item>
                 </ListGroup>
             </Card>
