@@ -2,7 +2,7 @@ import asyncHandler from "../middleware/asyncHandler.js"
 import Product from "../models/productModel.js"
 
 const getProducts = asyncHandler(async (req,res) => {
-    const pageSize = 8
+    const pageSize = process.env.PAGINATION_LIMIT
     const page = Number(req.query.pageNumber) || 1
 
     const keyword = req.query.keyword ? { name: { $regex: req.query.keyword, $options: 'i' } } : {}
@@ -30,7 +30,6 @@ const createProduct = asyncHandler(async (req,res) => {
         image: '/images/sample.jpg',
         brand: 'Sample brand',
         category: 'Sample category',
-        countInStock: 0,
         numReviews: 0,
         description: 'Sample description',
       });
@@ -40,7 +39,7 @@ const createProduct = asyncHandler(async (req,res) => {
 })
 
 const updateProduct = asyncHandler(async (req,res) => {
-    const { name, price, description, image, brand, category, countInStock } = req.body
+    const { name, price, description, image, brand, category } = req.body
     const product = await Product.findById(req.params.id)
     if (product) {
         product.name = name;
@@ -49,7 +48,6 @@ const updateProduct = asyncHandler(async (req,res) => {
         product.image = image;
         product.brand = brand;
         product.category = category;
-        product.countInStock = countInStock;
         
         const updatedProduct = await product.save()
         res.status(200).json(updatedProduct)

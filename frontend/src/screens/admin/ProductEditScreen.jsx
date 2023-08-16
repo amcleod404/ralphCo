@@ -15,7 +15,6 @@ const ProductEditScreen = () => {
     const [image, setImage] = useState('');
     const [brand, setBrand] = useState('');
     const [category, setCategory] = useState('');
-    const [countInStock, setCountInStock] = useState(0);
     const [description, setDescription] = useState('');
 
     const { data: product, isLoading, refetch, error} = useGetProductDetailsQuery(productId)
@@ -33,7 +32,6 @@ const ProductEditScreen = () => {
             setImage(product.image);
             setBrand(product.brand);
             setCategory(product.category);
-            setCountInStock(product.countInStock);
             setDescription(product.description);
         }
     }, [product])
@@ -49,7 +47,6 @@ const ProductEditScreen = () => {
                 brand,
                 category,
                 description,
-                countInStock,
             });
             toast.success('Product updated');
             refetch();
@@ -100,11 +97,6 @@ const ProductEditScreen = () => {
                     <Form.Group controlId='brand' className='my-2'>
                         <Form.Label>Brand</Form.Label>
                         <Form.Control type='text' placeholder='Enter brand' value={brand} onChange={(e) => setBrand(e.target.value)}>
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group controlId='stock' className='my-2'>
-                        <Form.Label>Stock</Form.Label>
-                        <Form.Control type='number' placeholder='Enter stock' value={countInStock} onChange={(e) => setCountInStock(e.target.value)}>
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId='category' className='my-2'>
