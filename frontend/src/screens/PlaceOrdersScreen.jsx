@@ -124,7 +124,7 @@ const PlaceOrdersScreen = () => {
                             </Row>
                         </ListGroup.Item>
                         {error ? (<ListGroup.Item>
-                            { error && <Message>{error}</Message>}
+                            { error && <Message variant='danger'>{error?.data?.message || error.error}</Message>}
                         </ListGroup.Item>) : <></>}
                         <ListGroup.Item>
                             <Button type='button' className='btn-block' disabled={cart.cartItems.length === 0} onClick={placeOrderHandler}>

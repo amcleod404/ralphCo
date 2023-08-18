@@ -26,6 +26,7 @@ import UserListScreen from './screens/admin/UserListScreen';
 import UserEditScreen from './screens/admin/UserEditScreen';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { HelmetProvider } from 'react-helmet-async'
+import ScrollToTop from './components/ScrollToTop';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -54,7 +55,6 @@ const router = createBrowserRouter(
         <Route path='/admin/user/:id/edit' element={<UserEditScreen></UserEditScreen>}></Route>
       </Route>
     </Route>
-
   )
 )
 
@@ -64,7 +64,8 @@ root.render(
     <HelmetProvider>
     <Provider store={store}>
       <PayPalScriptProvider deferLoading={true}>
-        <RouterProvider router={router} />
+        <RouterProvider router={router}>
+        </RouterProvider>
       </PayPalScriptProvider>
     </Provider>
     </HelmetProvider>
